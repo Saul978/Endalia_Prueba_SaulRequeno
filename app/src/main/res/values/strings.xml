@@ -1,0 +1,15 @@
+<resources>
+    <string name="usuario">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="registrarme">REGISTRARME</string>
+    <string name="acceder">ACCEDER</string>
+    <string name="repeat_password">Vuelve a introducir la contraseña</string>
+    <string name="crear_cuenta">CREAR CUENTA</string>
+    <string name="error_usuario">El correo electronico es obligatorio</string>
+    <string name="error_password">La contraseña es obligatoria</string>
+    <string name="registro_error_password">la contraseña tiene que tener 8 o mas caracteres,minúscula, mayúscula, números y al menos un carácter especial</string>
+    <string name="registro_error_password_validation">las 2 contraseña tienen que ser iguales</string>
+    <string name="cerrar_sesion">Cerrar Sesion</string>
+    <string name="search">search</string>
+
+</resources>

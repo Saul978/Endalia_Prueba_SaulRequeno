@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "612205804001",
+    "firebase_url": "https://endaliapruebatecnica-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "endaliapruebatecnica",
+    "storage_bucket": "endaliapruebatecnica.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:612205804001:android:d34176e3e8128cc09c3aa0",
+        "android_client_info": {
+          "package_name": "com.example.endalia_prueba_saulrequeno"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "612205804001-9koni841i81kkfcpb2ak817e6cpheof4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsqxVKLTSOYfThoZWdQ3pHXhfAXaDCZi4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "612205804001-9koni841i81kkfcpb2ak817e6cpheof4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
