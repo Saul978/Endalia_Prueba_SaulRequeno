@@ -5,22 +5,16 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
-import android.widget.Button
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import com.example.endalia_prueba_saulrequeno.R
 import com.example.endalia_prueba_saulrequeno.databinding.ActivityMainBinding
 import com.example.endalia_prueba_saulrequeno.ui.listacontactos.ListadoContactos
-import com.example.endalia_prueba_saulrequeno.ui.login.model.LogueoUsuario
-import com.google.android.gms.common.ErrorDialogFragment
-import com.google.firebase.firestore.util.Logger
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
 import dismissKeyboard
 import loseFocusAfterAction
 import onTextChanged
-import javax.inject.Inject
 
 
 /**
@@ -86,20 +80,24 @@ class PaginaLogueo : AppCompatActivity() {
      * inicializa los observer de la activity
      */
     private fun initObservers(){
-            loginViewModel.navigateToRegistrar.observe(this, Observer {
+            loginViewModel.navigateToRegistrar.observe(this) {
                 it.getContentIfNotHandled()?.let {
                     goToRegistro()
                 }
-            })
+            }
+        loginViewModel.dialogError.observe(this) {
+            it.getContentIfNotHandled()?.let {
+                dialogoErrorLogueo()
+            }
+        }
+        loginViewModel.navigateToContactos.observe(this) {
+            it.getContentIfNotHandled()?.let {
+                goToContactos()
+            }
+        }
 
-            loginViewModel.navigateToContactos.observe(this, Observer {
-                it.getContentIfNotHandled()?.let {
-                    goToContactos()
-                }
-            })
 
-
-            lifecycleScope.launchWhenStarted {
+        lifecycleScope.launchWhenStarted {
                 loginViewModel.verEstado.collect { viewState ->
                     updateUI(viewState)
                 }
@@ -152,4 +150,15 @@ class PaginaLogueo : AppCompatActivity() {
         startActivity(ListadoContactos.create(this))
     }
 
+
+    /**
+     * Dialogo error
+     * Muestra el dialog con el error al fallar el inicio de sesion
+     */
+    fun dialogoErrorLogueo(){
+        AlertDialog.Builder(this).apply {
+            setTitle(getString(R.string.titulo_error_logueo))
+            setMessage(getString(R.string.error_logueo))
+        }.create().show()
+    }
 }

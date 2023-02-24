@@ -4,33 +4,27 @@ import com.example.endalia_prueba_saulrequeno.R
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.telecom.Call.Details
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.endalia_prueba_saulrequeno.core.adapter.ContactosAdapter
-import com.example.endalia_prueba_saulrequeno.data.network.AutenticacionFirebase
 import com.example.endalia_prueba_saulrequeno.data.network.ClienteFirebase
 import com.example.endalia_prueba_saulrequeno.databinding.ActivityListadoContactosBinding
 import com.example.endalia_prueba_saulrequeno.ui.listacontactos.model.Contactos
 import com.example.endalia_prueba_saulrequeno.ui.login.PaginaLogueo
-import com.example.endalia_prueba_saulrequeno.ui.login.PaginaRegistro
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import javax.inject.Named
 
 
 /**
@@ -43,10 +37,12 @@ import javax.inject.Named
 class ListadoContactos  : AppCompatActivity() {
 
     companion object {
-        fun create(context: Context): Intent =
-            Intent(context, ListadoContactos::class.java)
+        fun create(context: Context): Intent {
+            val intent = Intent(context, ListadoContactos::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            return intent
+        }
     }
-    private lateinit var searchView: SearchView
     private  lateinit var binding: ActivityListadoContactosBinding
     private val listadoViewModel: ListadoContactosViewModel by viewModels()
     private lateinit var adaptador: ContactosAdapter
@@ -64,11 +60,12 @@ class ListadoContactos  : AppCompatActivity() {
     }
 
     private fun initObservers(){
-        listadoViewModel.navigateToLogueo.observe(this, Observer {
+        listadoViewModel.navigateToLogueo.observe(this) {
             it.getContentIfNotHandled()?.let {
                 goToLogueo()
             }
-        })}
+        }
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.contacto_menu,menu)

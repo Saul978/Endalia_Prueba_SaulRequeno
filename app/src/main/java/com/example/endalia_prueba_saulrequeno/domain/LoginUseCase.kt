@@ -1,6 +1,5 @@
 package com.example.endalia_prueba_saulrequeno.domain
 
-import android.accessibilityservice.AccessibilityService
 import com.example.endalia_prueba_saulrequeno.data.network.AutenticacionFirebase
 import com.example.endalia_prueba_saulrequeno.data.response.RespuestaLogin
 import javax.inject.Inject

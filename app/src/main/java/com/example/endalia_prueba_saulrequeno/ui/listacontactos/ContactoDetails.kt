@@ -4,9 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.endalia_prueba_saulrequeno.core.adapter.ContactosAdapter
 import com.example.endalia_prueba_saulrequeno.databinding.ActivityContactoDetailsBinding
 import com.example.endalia_prueba_saulrequeno.ui.listacontactos.model.Contactos
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,19 +45,20 @@ class ContactoDetails : AppCompatActivity() {
         binding= ActivityContactoDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        binding.toolbar.setNavigationOnClickListener{onBackPressed()}
 
         val contacto = getSerializable(intent, "contacto", Contactos::class.java)
 
-        if( contacto!= null){
             binding.TelefonoContactoDetails.text= contacto.phone
             binding.EmailContactoDetails.text= contacto.email
-            binding.NombreContactoDetails.text = contacto.nombre+ " "+ contacto.apellido
+            binding.NombreContactoDetails.text = "${contacto.nombre} ${contacto.apellido}"
             binding.PuestoContactoDetails.text = contacto.puesto
-            binding.ImagenDetail.text = contacto.nombre.substring(0,1).uppercase()+ contacto.apellido.substring(0,1).uppercase()
+            binding.ImagenDetail.text = "${contacto.nombre.substring(0, 1).uppercase()}${
+                contacto.apellido.substring(0, 1).uppercase()
+            }"
             binding.botonTelefono.setOnClickListener{marcarTelefono(contacto.phone.replace("\\s".toRegex(), ""))}
             binding.botonEmail.setOnClickListener { mandarCorreo(contacto.email) }
-        }
+
 
 
     }

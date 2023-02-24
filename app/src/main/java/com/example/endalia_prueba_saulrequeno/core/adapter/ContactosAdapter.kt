@@ -1,10 +1,7 @@
 package com.example.endalia_prueba_saulrequeno.core.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.endalia_prueba_saulrequeno.R
 import com.example.endalia_prueba_saulrequeno.ui.listacontactos.model.Contactos
@@ -32,6 +29,7 @@ class ContactosAdapter(var listaContactos: ArrayList<Contactos>) : RecyclerView.
         holder.itemView.setOnClickListener{
             onContactoClick?.invoke(item)
         }
+        
     }
 
     override fun getItemCount(): Int = listaContactos.size
@@ -63,7 +61,7 @@ class ContactosAdapter(var listaContactos: ArrayList<Contactos>) : RecyclerView.
      * Actualiza la lista del Recyclerview con la lista que se le pasa siendo
      * @param listaContactos
      */
-    fun setListaFiltrada(listaContactos: ArrayList<Contactos>){
+    private fun setListaFiltrada(listaContactos: ArrayList<Contactos>){
         this.listaContactos= listaContactos
         notifyDataSetChanged()
     }

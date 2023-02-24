@@ -1,6 +1,7 @@
 package com.example.endalia_prueba_saulrequeno.data.network
 
 import com.example.endalia_prueba_saulrequeno.data.response.RespuestaLogin
+import com.example.endalia_prueba_saulrequeno.data.response.RespuestaRegistro
 import com.google.firebase.auth.AuthResult
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -34,9 +35,9 @@ class AutenticacionFirebase @Inject constructor(private val firebase: ClienteFir
      * @param password
      * @return
      */
-    suspend fun createAccount(usuario: String, password: String):AuthResult?{
-        return firebase.auth.createUserWithEmailAndPassword(usuario,password).await()
-    }
+    suspend fun createAccount(usuario: String, password: String):RespuestaRegistro= runCatching{
+         firebase.auth.createUserWithEmailAndPassword(usuario,password).await()
+    }.toRespuestaRegistro()
 
     /**
      * toRespuestaLogin
@@ -52,6 +53,14 @@ class AutenticacionFirebase @Inject constructor(private val firebase: ClienteFir
         }
     }
 
+    private fun Result<AuthResult>.toRespuestaRegistro()= when (val result= getOrNull()){
+        null-> RespuestaRegistro.Error
+        else-> {
+            val Id = result.user
+            checkNotNull(Id)
+            RespuestaRegistro.Success(true)
+        }
+    }
 }
 
 

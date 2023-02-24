@@ -14,10 +14,4 @@ open class Event<out T>(private val content: T) {
         }
     }
 
-    fun getContent(): T? {
-        return content
-    }
-
-
-    fun peekContent(): T = content
 }

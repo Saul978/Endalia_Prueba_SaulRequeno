@@ -1,7 +1,5 @@
 package com.example.endalia_prueba_saulrequeno.ui.login
 
-import android.content.Context
-import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -39,6 +37,11 @@ class LogueoViewModel @Inject constructor(val loginUseCase: LoginUseCase) :ViewM
     private val _navigateToContactos = MutableLiveData<Event<Boolean>>()
     val navigateToContactos: LiveData<Event<Boolean>>
         get() = _navigateToContactos
+
+    private val _dialogError = MutableLiveData<Event<Boolean>>()
+    val dialogError: LiveData<Event<Boolean>>
+        get() = _dialogError
+
 
     private val _navigateToRegistrar = MutableLiveData<Event<Boolean>>()
     val navigateToRegistrar: LiveData<Event<Boolean>>
@@ -82,6 +85,7 @@ class LogueoViewModel @Inject constructor(val loginUseCase: LoginUseCase) :ViewM
             when (val resultado = loginUseCase(usuario, password)) {
                 RespuestaLogin.Error -> {
                     _verEstado.value = LogueoViewState(isLoading = false)
+                    _dialogError.value = Event(true)
                 }
 
                 is RespuestaLogin.Success -> {
@@ -123,5 +127,7 @@ class LogueoViewModel @Inject constructor(val loginUseCase: LoginUseCase) :ViewM
      */
     private fun isValidPassword(password: String): Boolean =
       password.isNotEmpty()
+
+
 
 }

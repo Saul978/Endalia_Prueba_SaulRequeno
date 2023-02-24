@@ -27,7 +27,7 @@ class ContactosViewHolder(view: View):RecyclerView.ViewHolder(view){
     fun renderizar(contactos: Contactos){
         val perfilLetra = contactos.nombre.substring(0,1).uppercase()+ contactos.apellido.substring(0,1).uppercase()
         imagen.text = perfilLetra
-        nombre.text = contactos.nombre + ", "+ contactos.apellido
+        nombre.text = "${contactos.nombre}, ${contactos.apellido}"
         puesto.text = contactos.puesto
     }
 

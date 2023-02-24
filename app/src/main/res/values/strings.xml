@@ -11,5 +11,9 @@
     <string name="registro_error_password_validation">las 2 contraseña tienen que ser iguales</string>
     <string name="cerrar_sesion">Cerrar Sesion</string>
     <string name="search">search</string>
+    <string name="error_Registro">El usuario introducido ya existe</string>
+    <string name="titulo_error_registro">Error al Registrar</string>
+    <string name="titulo_error_logueo">Error al Loguear</string>
+    <string name="error_logueo">El usuario introducido no existe o la contraseña es incorrecta</string>
 
 </resources>

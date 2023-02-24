@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import com.example.endalia_prueba_saulrequeno.R
 import com.example.endalia_prueba_saulrequeno.databinding.ActivityPaginaRegistroBinding
@@ -94,6 +95,11 @@ class PaginaRegistro : AppCompatActivity() {
             }
         }
 
+        registroViewModel.dialogError.observe(this) {
+            it.getContentIfNotHandled()?.let {
+                dialogoErrorRegistro()
+            }
+        }
 
         lifecycleScope.launchWhenStarted {
             registroViewModel.verEstado.collect { viewState ->
@@ -131,7 +137,7 @@ class PaginaRegistro : AppCompatActivity() {
             InputLayoutPasswordRegistro.error=
                 if (viewState.isValidPassword)null else getString(R.string.registro_error_password)
             InputLayoutPasswordValidationRegistro.error=
-                if (viewState.isValidPassword)null else getString(R.string.registro_error_password_validation)
+                if (viewState.isSamePassword)null else getString(R.string.registro_error_password_validation)
         }
     }
 
@@ -141,6 +147,17 @@ class PaginaRegistro : AppCompatActivity() {
      */
     private fun goToContactos() {
         startActivity(ListadoContactos.create(this))
+    }
+
+    /**
+     * Dialogo error
+     * Muestra el dialog con el error
+     */
+    fun dialogoErrorRegistro(){
+        AlertDialog.Builder(this).apply {
+            setTitle(getString(R.string.titulo_error_registro))
+            setMessage(getString(R.string.error_Registro))
+        }.create().show()
     }
 
 }

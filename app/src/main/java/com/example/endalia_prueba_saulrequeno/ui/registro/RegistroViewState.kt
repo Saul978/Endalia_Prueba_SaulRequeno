@@ -11,11 +11,12 @@ package com.example.endalia_prueba_saulrequeno.ui.registro
 class RegistroViewState (
     val isLoading: Boolean = false,
     val isValidUsuario: Boolean = true,
-    val isValidPassword: Boolean = true
+    val isValidPassword: Boolean = true,
+    val isSamePassword: Boolean = true
 ){
     /**
      * User validado
      *
      */
-    fun userValidado() = isValidUsuario && isValidPassword
+    fun userValidado() = isValidUsuario && isValidPassword && isSamePassword
 }

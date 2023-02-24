@@ -2,8 +2,6 @@ package com.example.endalia_prueba_saulrequeno.data.network
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -16,5 +14,5 @@ import javax.inject.Singleton
 @Singleton
 class ClienteFirebase @Inject constructor(){
     val auth: FirebaseAuth get() = FirebaseAuth.getInstance()
-       val database = FirebaseDatabase.getInstance().getReference("/contactos/contactos")
+    val database = FirebaseDatabase.getInstance().getReference("/contactos/contactos")
 }
